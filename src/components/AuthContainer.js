@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { Container, Form, Button } from '.';
+import { Container, Form, Button, Field } from '.';
 
 const AuthContainer = styled(Container)`
   ${Form} {
-    box-shadow: 0 0 1rem ${props => props.theme.shadow};
+    box-shadow: 0 0 0.5rem ${props => props.theme.shadow};
 
     ${Button} {
       display: block;
@@ -11,7 +11,7 @@ const AuthContainer = styled(Container)`
       margin: 2rem auto;
     }
 
-    .field {
+    ${Field} {
       margin: 2rem auto 1rem;
     }
 

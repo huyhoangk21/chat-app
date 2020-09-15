@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { Container, Button } from '.';
+import { Container } from '.';
+
 const ChatContainer = styled(Container)`
   background-color: ${props => props.theme.white};
+  position: relative;
 
   .inactive {
     display: none;

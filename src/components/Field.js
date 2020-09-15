@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const Input = styled.input`
+export const Input = styled.input`
   position: relative;
   z-index: 1;
   outline: none;
@@ -13,7 +12,7 @@ const Input = styled.input`
   font-size: ${props => props.theme.normal};
 `;
 
-const Label = styled.label`
+export const Label = styled.label`
   color: ${props => props.theme.gray};
   font-size: ${props => props.theme.normal};
   position: absolute;
@@ -24,7 +23,7 @@ const Label = styled.label`
   transition: transform 0.4s;
 `;
 
-const Wrapper = styled.div`
+const Field = styled.div`
   width: 70%;
   border-bottom: 1px solid ${props => props.theme.gray};
   position: relative;
@@ -54,14 +53,5 @@ const Wrapper = styled.div`
     transform: translateY(-1.5rem) scale(0.8);
   }
 `;
-
-const Field = ({ labelProps, inputProps, children }) => {
-  return (
-    <Wrapper className='field'>
-      <Input {...inputProps} placeholder=' ' />
-      <Label {...labelProps}>{children}</Label>
-    </Wrapper>
-  );
-};
 
 export default Field;

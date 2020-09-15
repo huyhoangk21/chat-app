@@ -5,9 +5,16 @@ import {
   Title,
   Button,
   Field,
-  Modal,
+  RoomForm,
+  Input,
+  Label,
 } from '../components';
 const Chat = () => {
+  const onFormSubmit = e => {
+    e.preventDefault();
+    //connect socket here
+  };
+
   return (
     <ChatContainer>
       <Header>
@@ -16,11 +23,13 @@ const Chat = () => {
           <span>Logout</span>
         </Button>
       </Header>
-      <Button className='control-button inactive'>Enter a chat room</Button>
-      <Modal>
-        <Field className='field'>Enter room</Field>
+      <RoomForm onSubmit={onFormSubmit}>
+        <Field>
+          <Input type='test' id='room' name='room' placeholder=' ' />
+          <Label htmlFor='password'>Room</Label>
+        </Field>
         <Button className='control-button'>Enter</Button>
-      </Modal>
+      </RoomForm>
     </ChatContainer>
   );
 };
