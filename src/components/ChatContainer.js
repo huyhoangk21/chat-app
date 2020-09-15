@@ -23,7 +23,7 @@ const ChatContainer = styled(Container)`
       background: ${props => props.theme.main}
         radial-gradient(circle, transparent 1%, ${props => props.theme.main} 1%)
         center/15000%;
-      filter: brightness(1.3);
+      filter: brightness(1.2);
       color: ${props => props.theme.white};
     }
 

@@ -23,7 +23,7 @@ const Chat = () => {
           <span>Logout</span>
         </Button>
       </Header>
-      <RoomForm onSubmit={onFormSubmit}>
+      <RoomForm onSubmit={onFormSubmit} autoComplete='off'>
         <Field>
           <Input type='test' id='room' name='room' placeholder=' ' />
           <Label htmlFor='password'>Room</Label>

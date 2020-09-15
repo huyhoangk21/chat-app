@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 const Login = () => {
   return (
     <AuthContainer>
-      <Form>
+      <Form autoComplete='off'>
         <Title>Login</Title>
         <Field>
           <Input type='text' id='username' name='username' placeholder=' ' />
