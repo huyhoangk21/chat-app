@@ -12,7 +12,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Switch>
-          <PrivateRoute path='/' exact component={Chat} />
+          <Route path='/' exact component={Chat} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
         </Switch>

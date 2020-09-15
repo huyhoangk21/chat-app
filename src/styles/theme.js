@@ -2,7 +2,7 @@ const theme = {
   main: '#32746D',
   white: '#fff',
   black: '#000',
-  shadow: '#888888',
+  shadow: '#999',
   gray: '#A9A9A9',
   chat: '#49a99f',
   error: '#DB504A',
