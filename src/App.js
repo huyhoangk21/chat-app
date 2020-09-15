@@ -3,8 +3,8 @@ import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 import GlobalStyle from './styles/globalStyles';
 import { Route, Switch } from 'react-router-dom';
-import { Chat, Login, Signup } from './components/pages';
-import { PrivateRoute } from './components/elements';
+import { Chat, Login, Signup } from './pages';
+import { PrivateRoute } from './components';
 
 const App = () => {
   return (

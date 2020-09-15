@@ -27,7 +27,6 @@ const Label = styled.label`
 const Wrapper = styled.div`
   width: 70%;
   border-bottom: 1px solid ${props => props.theme.gray};
-  margin: 2rem auto 1rem;
   position: relative;
   &::after {
     content: '';
@@ -58,7 +57,7 @@ const Wrapper = styled.div`
 
 const Field = ({ labelProps, inputProps, children }) => {
   return (
-    <Wrapper>
+    <Wrapper className='field'>
       <Input {...inputProps} placeholder=' ' />
       <Label {...labelProps}>{children}</Label>
     </Wrapper>
