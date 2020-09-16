@@ -10,3 +10,5 @@ export { default as Header } from './Header';
 export { default as RoomForm } from './RoomForm';
 export { default as Alert } from './Alert';
 export { default as Icon } from './Icon';
+export { default as ChatBox } from './ChatBox';
+export { MyMessage, OthersMessage } from './Message';

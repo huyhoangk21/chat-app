@@ -18,6 +18,7 @@ const Login = ({ user, login, alert, clearAlert }) => {
   const [password, setPassword] = useState('');
   const { error, success } = alert;
   const showAlert = error || success;
+
   const onFormSubmit = e => {
     e.preventDefault();
     login(username, password);
@@ -58,7 +59,7 @@ const Login = ({ user, login, alert, clearAlert }) => {
           />
           <Label htmlFor='password'>Password</Label>
         </Field>
-        <Button>Login</Button>
+        <Button type='submit'>Login</Button>
         <p>
           Don't have an account? <Link to='/signup'>Signup</Link>
         </p>

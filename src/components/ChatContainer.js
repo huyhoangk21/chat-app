@@ -1,10 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Container } from '.';
 
 const ChatContainer = styled(Container)`
-  background-color: ${props => props.theme.white};
+  background-color: ${props =>
+    props.dark ? props.theme.dark : props.theme.main};
   position: relative;
-
+  transition: background-color 0.4s;
   .inactive {
     display: none;
   }

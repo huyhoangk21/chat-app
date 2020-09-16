@@ -74,7 +74,7 @@ const Signup = ({ signup, alert, token, clearAlert }) => {
           />
           <Label htmlFor='password2'>Confirm Password</Label>
         </Field>
-        <Button>Signup</Button>
+        <Button type='submit'>Signup</Button>
         <p>
           Already have an account? <Link to='/login'>Login</Link>
         </p>
