@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../redux/actions';
+import { v4 as uuidv4 } from 'uuid';
+import {
+  createSocket,
+  disconnectSocket,
+  sendMessage,
+  receiveMessage,
+} from '../socketIO';
 import {
   ChatContainer,
   Header,
@@ -14,33 +21,58 @@ import {
   Icon,
   MyMessage,
   OthersMessage,
+  AdminMessage,
 } from '../components';
+
 const Chat = ({ user, logout }) => {
   const [chat, setChat] = useState(false);
   const [room, setRoom] = useState('');
+  const [roomInput, setRoomInput] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const chatRef = useRef();
+  useEffect(() => {
+    createSocket(room, user.user);
+    receiveMessage((err, msg, sender) => {
+      if (err) return;
+      const chat =
+        sender === 'admin' ? (
+          <AdminMessage key={uuidv4()}>{msg}</AdminMessage>
+        ) : (
+          <OthersMessage key={uuidv4()} sender={sender}>
+            {msg}
+          </OthersMessage>
+        );
+      setMessages(oldMessages => [...oldMessages, chat]);
+    });
+    return () => {
+      disconnectSocket(user.user, room);
+    };
+  }, [room, user.user]);
 
   const onRoomSubmit = e => {
     e.preventDefault();
-    //connect socket here
-    if (!room) return;
-
-    setTimeout(() => setChat(true), 400); //delay
+    if (!roomInput) return;
+    setTimeout(() => setChat(true), 400);
+    setRoom(roomInput);
   };
 
   const closeChat = () => {
-    // disconnect socket here
-
     setRoom('');
+    setMessages('');
     setChat(false);
   };
 
   const onMessageSubmit = e => {
     e.preventDefault();
     if (!message) return;
-    setMessages([...messages, <MyMessage>{message}</MyMessage>]);
+    setMessages(oldMessages => [
+      ...oldMessages,
+      <MyMessage key={uuidv4()}>{message}</MyMessage>,
+    ]);
+    sendMessage(room, user.user, message);
     setMessage('');
+    chatRef.current.focus();
   };
 
   return (
@@ -58,11 +90,11 @@ const Chat = ({ user, logout }) => {
         <Field>
           <Input
             type='test'
-            id='room'
-            name='room'
+            id='roomInput'
+            name='roomInput'
             placeholder=' '
-            value={room}
-            onChange={e => setRoom(e.target.value)}
+            value={roomInput}
+            onChange={e => setRoomInput(e.target.value)}
           />
           <Label htmlFor='password'>Room</Label>
         </Field>
@@ -83,6 +115,7 @@ const Chat = ({ user, logout }) => {
             name='message'
             value={message}
             onChange={e => setMessage(e.target.value)}
+            ref={chatRef}
           />
           <Button type='submit' disabled={!message}>
             Send

@@ -13,6 +13,7 @@ const theme = {
   h2: '1.25rem',
   normal: '1rem',
   small: '0.875rem',
+  extraSmall: '0.75rem',
 };
 
 export default theme;

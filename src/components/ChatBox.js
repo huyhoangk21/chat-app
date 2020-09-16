@@ -23,6 +23,7 @@ const Content = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 `;
 const Form = styled.form`
   display: flex;
