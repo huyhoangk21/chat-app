@@ -1,6 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import GlobalStyle from './styles/globalStyles';
 import { Route, Switch } from 'react-router-dom';
 import { Chat, Login, Signup } from './pages';
@@ -8,7 +10,7 @@ import { PrivateRoute } from './components';
 
 const App = () => {
   return (
-    <Fragment>
+    <Provider store={store}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Switch>
@@ -17,7 +19,7 @@ const App = () => {
           <Route path='/signup' component={Signup} />
         </Switch>
       </ThemeProvider>
-    </Fragment>
+    </Provider>
   );
 };
 

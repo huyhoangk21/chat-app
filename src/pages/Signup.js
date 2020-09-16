@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { signup } from '../redux/actions';
 import {
   Field,
   Form,
@@ -9,13 +11,30 @@ import {
   Label,
 } from '../components';
 import { Link } from 'react-router-dom';
-const Signup = () => {
+
+const Signup = ({ signup }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
+
+  const onFormSubmit = e => {
+    e.preventDefault();
+    signup(username, password, password2);
+  };
+
   return (
     <AuthContainer>
-      <Form autoComplete='off'>
+      <Form autoComplete='off' onSubmit={onFormSubmit}>
         <Title>Signup</Title>
         <Field>
-          <Input type='text' id='username' name='username' placeholder=' ' />
+          <Input
+            type='text'
+            id='username'
+            name='username'
+            placeholder=' '
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+          />
           <Label htmlFor='username'>Username</Label>
         </Field>
         <Field>
@@ -24,6 +43,8 @@ const Signup = () => {
             id='password'
             name='password'
             placeholder=' '
+            value={password}
+            onChange={e => setPassword(e.target.value)}
           />
           <Label htmlFor='password'>Password</Label>
         </Field>
@@ -33,6 +54,8 @@ const Signup = () => {
             id='password2'
             name='password2'
             placeholder=' '
+            value={password2}
+            onChange={e => setPassword2(e.target.value)}
           />
           <Label htmlFor='password2'>Confirm Password</Label>
         </Field>
@@ -45,4 +68,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default connect(null, { signup })(Signup);
