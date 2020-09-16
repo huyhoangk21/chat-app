@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { logout } from '../redux/actions';
 import {
   ChatContainer,
   Header,
@@ -9,7 +11,9 @@ import {
   Input,
   Label,
 } from '../components';
-const Chat = () => {
+const Chat = ({ user, logout }) => {
+  const [chat, setChat] = useState(true);
+
   const onFormSubmit = e => {
     e.preventDefault();
     //connect socket here
@@ -18,12 +22,15 @@ const Chat = () => {
   return (
     <ChatContainer>
       <Header>
-        <Title header>Welcome Name</Title>
-        <Button animated>
+        <Title header>Welcome {user.user}</Title>
+        <Button animated onClick={logout}>
           <span>Logout</span>
         </Button>
       </Header>
-      <RoomForm onSubmit={onFormSubmit} autoComplete='off'>
+      <RoomForm
+        onSubmit={onFormSubmit}
+        autoComplete='off'
+        className={chat ? 'inactive' : 'active'}>
         <Field>
           <Input type='test' id='room' name='room' placeholder=' ' />
           <Label htmlFor='password'>Room</Label>
@@ -34,4 +41,8 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+const mapStateToProps = state => {
+  return { user: state.user };
+};
+
+export default connect(mapStateToProps, { logout })(Chat);

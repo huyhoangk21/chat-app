@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { signup } from '../redux/actions';
+import { signup, clearAlert } from '../redux/actions';
 import {
   Field,
   Form,
@@ -9,21 +9,36 @@ import {
   AuthContainer,
   Input,
   Label,
+  Alert,
+  Icon,
 } from '../components';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
-const Signup = ({ signup }) => {
+const Signup = ({ signup, alert, token, clearAlert }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
-
+  const { error, success } = alert;
   const onFormSubmit = e => {
     e.preventDefault();
     signup(username, password, password2);
   };
 
+  if (success) {
+    return <Redirect to='/login' />;
+  }
+
+  if (token) {
+    return <Redirect to='/' />;
+  }
+
   return (
     <AuthContainer>
+      {error && (
+        <Alert error>
+          {error} <Icon className='fas fa-times' onClick={clearAlert} />
+        </Alert>
+      )}
       <Form autoComplete='off' onSubmit={onFormSubmit}>
         <Title>Signup</Title>
         <Field>
@@ -68,4 +83,8 @@ const Signup = ({ signup }) => {
   );
 };
 
-export default connect(null, { signup })(Signup);
+const mapStateToProps = state => {
+  return { alert: state.alert, token: state.user.token };
+};
+
+export default connect(mapStateToProps, { signup, clearAlert })(Signup);

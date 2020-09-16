@@ -21,6 +21,7 @@ export const login = (username, password) => async dispatch => {
     const { token, user } = response.data;
     dispatch({ type: LOGIN_SUCCESS, payload: { token, user } });
     localStorage.setItem('token', token);
+    console.log('hello');
     localStorage.setItem('user', user);
   } catch (err) {
     dispatch({ type: LOGIN_FAILURE });

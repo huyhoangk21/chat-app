@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { login } from '../redux/actions';
+import { login, clearAlert } from '../redux/actions';
 import {
   Field,
   Form,
@@ -9,19 +9,31 @@ import {
   AuthContainer,
   Input,
   Label,
+  Alert,
+  Icon,
 } from '../components';
-import { Link } from 'react-router-dom';
-const Login = ({ login }) => {
+import { Link, Redirect } from 'react-router-dom';
+const Login = ({ user, login, alert, clearAlert }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const { error, success } = alert;
+  const showAlert = error || success;
   const onFormSubmit = e => {
     e.preventDefault();
     login(username, password);
   };
 
+  if (user.token) {
+    return <Redirect to='/' />;
+  }
+
   return (
     <AuthContainer>
+      {showAlert && (
+        <Alert error={error} success={success}>
+          {showAlert} <Icon className='fas fa-times' onClick={clearAlert} />
+        </Alert>
+      )}
       <Form autoComplete='off' onSubmit={onFormSubmit}>
         <Title>Login</Title>
         <Field>
@@ -55,4 +67,8 @@ const Login = ({ login }) => {
   );
 };
 
-export default connect(null, { login })(Login);
+const mapStateToProps = state => {
+  return { alert: state.alert, user: state.user };
+};
+
+export default connect(mapStateToProps, { login, clearAlert })(Login);

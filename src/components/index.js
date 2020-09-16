@@ -8,3 +8,5 @@ export { default as AuthContainer } from './AuthContainer';
 export { default as ChatContainer } from './ChatContainer';
 export { default as Header } from './Header';
 export { default as RoomForm } from './RoomForm';
+export { default as Alert } from './Alert';
+export { default as Icon } from './Icon';
