@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 let socket;
-const ENDPOINT = 'http://localhost:5000';
+const ENDPOINT = 'https://chat-app-hoang.herokuapp.com/';
 
 export const createSocket = (room, user) => {
   socket = io(ENDPOINT);
