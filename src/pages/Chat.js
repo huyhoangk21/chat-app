@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../redux/actions';
 import { v4 as uuidv4 } from 'uuid';
+import { animateScroll } from 'react-scroll';
 import {
   createSocket,
   disconnectSocket,
@@ -49,6 +50,12 @@ const Chat = ({ user, logout }) => {
       disconnectSocket(user.user, room);
     };
   }, [room, user.user]);
+
+  useEffect(() => {
+    animateScroll.scrollToBottom({
+      containerId: 'chat-content',
+    });
+  }, [messages]);
 
   const onRoomSubmit = e => {
     e.preventDefault();
@@ -107,7 +114,7 @@ const Chat = ({ user, logout }) => {
           <Title>Room: {room}</Title>
           <Icon className='fas fa-times' onClick={closeChat} />
         </ChatBox.Header>
-        <ChatBox.Content>{messages}</ChatBox.Content>
+        <ChatBox.Content id='chat-content'>{messages}</ChatBox.Content>
         <ChatBox.Form onSubmit={onMessageSubmit} autoComplete='off'>
           <ChatBox.Message
             type='text'

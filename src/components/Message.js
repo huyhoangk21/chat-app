@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 export const MyMessage = styled.div`
+  max-width: 60%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   color: ${props => props.theme.white};
   background-color: ${props => props.theme.main};
-  display: inline-block;
+  display: block;
   padding: 0.5rem;
   border-radius: 0.2rem;
   align-self: flex-end;

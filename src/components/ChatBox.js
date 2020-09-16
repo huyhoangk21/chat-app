@@ -23,7 +23,11 @@ const Content = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 12px;
+    color: ${props => props.theme.main};
+  }
 `;
 const Form = styled.form`
   display: flex;
